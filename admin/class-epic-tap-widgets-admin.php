@@ -73,7 +73,7 @@ class Epic_Tap_Widgets_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'css/epic-tap-widgets-admin.css', array(), $this->version, 'all' );
+//		wp_enqueue_style( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'css/epic-tap-widgets-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,8 +96,36 @@ class Epic_Tap_Widgets_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'js/epic-tap-widgets-admin.js', array( 'jquery' ), $this->version, false );
+//		wp_enqueue_script( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'js/epic-tap-widgets-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+    public function register_widget() {
+        register_widget('Epic_Articulos_Relacionados_Widget');
+        register_widget('Epic_Banner_Promo_Widget');
+        register_widget('Epic_Bonos_Sin_Deposito_Widget');
+        register_widget('Epic_Casas_Apuestas_Widget');
+        register_widget('Epic_Chat_Slim_Widget');
+        unregister_widget("Epic_ConcursosTAP_Widget");
+        register_widget('Epic_Concursos_Widget');
+        unregister_widget('WP_Widget_Search');
+        register_widget('Epic_Contact_Us_Widget');
+        unregister_widget('WP_Widget_Links');
+        register_widget('Epic_Enlaces_Widget');
+        register_widget('Epic_FB_Like_Box_Widget');
+        register_widget('Epic_Newsletter_Widget');
+        register_widget('Epic_Nuestros_Tipsters_Widget');
+        register_widget('Epic_Promociones_Destacadas_Widget');
+        register_widget('Epic_Random_News_Widget');
+        unregister_widget('WP_Widget_Recent_Posts');
+        register_widget('Epic_Recent_Posts_Widget');
+        unregister_widget('WP_Widget_Search');
+        register_widget('Epic_Search_Form_Widget');
+        register_widget('Epic_Social_Links_Widget');
+        unregister_widget('WP_Widget_Tag_Cloud');
+        register_widget('Epic_Tags_Cloud_Widget');
+        register_widget('Epic_Tipsters_Blog_Widget');
+        register_widget('Epic_Twitter_Timeline_Widget');
+    }
 
 }

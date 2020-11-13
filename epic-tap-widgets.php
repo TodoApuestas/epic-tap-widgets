@@ -1,13 +1,6 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @link              http://www.linkedin.com/in/mrbrazzi/
  * @since             1.0.0
  * @package           Epic_Tap_Widgets
@@ -15,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       Epic Tap Widgets
  * Plugin URI:        https://www.wordpress.org/plugins/epic-tap-widgets/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Widgets collection for TodoApuestas's blog network.
  * Version:           1.0.0
  * Author:            Alain Sanchez <luka.ghost@gmail.com>
  * Author URI:        http://www.linkedin.com/in/mrbrazzi/

@@ -1,8 +1,6 @@
 <?php
 
 /**
- * The public-facing functionality of the plugin.
- *
  * @link       http://www.linkedin.com/in/mrbrazzi/
  * @since      1.0.0
  *
@@ -11,11 +9,6 @@
  */
 
 /**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
  * @package    Epic_Tap_Widgets
  * @subpackage Epic_Tap_Widgets/public
  * @author     Alain Sanchez <luka.ghost@gmail.com>
@@ -73,7 +66,7 @@ class Epic_Tap_Widgets_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'css/epic-tap-widgets-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'css/epic-tap-widgets-public.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +89,7 @@ class Epic_Tap_Widgets_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'js/epic-tap-widgets-public.js', array( 'jquery' ), $this->version, false );
+//		wp_enqueue_script( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'js/epic-tap-widgets-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

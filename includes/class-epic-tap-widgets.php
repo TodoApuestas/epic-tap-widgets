@@ -78,7 +78,6 @@ class Epic_Tap_Widgets {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -122,6 +121,101 @@ class Epic_Tap_Widgets {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-epic-tap-widgets-public.php';
 
+        /**
+         *  Load Articulos Relacionados Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-articulos-relacionados.php';
+
+        /**
+         *  Load Banner Promo Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-banner-promo.php';
+
+        /**
+         *  Load Bonos sin Deposito Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-bonos-sin-deposito.php';
+
+        /**
+         *  Load Casas Apuestas Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-casas-apuestas.php';
+
+        /**
+         *  Load Chat Slim Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-chat-slim.php';
+
+        /**
+         *  Load Concursos Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-concursos.php';
+
+        /**
+         *  Load Contact Us Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-contact-us.php';
+
+        /**
+         *  Load Enlaces Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-enlaces.php';
+
+        /**
+         *  Load Facebook Like Box Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-facebox-like-box.php';
+
+        /**
+         *  Load Newsletter Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-newsletter.php';
+
+        /**
+         *  Load Nuestros Tipsters Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-nuestros-tipsters.php';
+
+        /**
+         *  Load Promociones Destacadas Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-promociones-destacadas.php';
+
+        /**
+         *  Load Random Nesw Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-random-news.php';
+
+        /**
+         *  Load Recent Post Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-recent-post.php';
+
+        /**
+         *  Load Search Form Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-search-form.php';
+
+        /**
+         *  Load Social Links Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-social-links.php';
+
+        /**
+         *  Load Tags Cloud Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-tags-cloud.php';
+
+        /**
+         *  Load Tipsters Blog Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-tipsters-blog.php';
+
+        /**
+         *  Load Twitter Timeline Widget
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-twitter-timeline.php';
+
 		$this->loader = new Epic_Tap_Widgets_Loader();
 
 	}
@@ -156,6 +250,7 @@ class Epic_Tap_Widgets {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('widgets_init', $plugin_admin, 'register_widget');
 
 	}
 
@@ -208,11 +303,10 @@ class Epic_Tap_Widgets {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @register_widget('Epic_Promociones_Destacadas_Widget');since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {
 		return $this->version;
 	}
-
 }
