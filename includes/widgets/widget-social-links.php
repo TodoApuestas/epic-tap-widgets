@@ -39,9 +39,9 @@ if(!class_exists('Epic_Social_Links_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title']) ? $instance['title']: __('Go Social', 'epic');
-            $text = isset($instance['text']) ? $instance['text'] : __('Stay in touch with us', 'epic');
-            $display_in = isset($instance['display_in']) ? $instance['display_in'] : 'footer';?>
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']): __('Go Social', 'epic');
+            $text = isset($instance['text']) ? sanitize_text_field($instance['text']) : __('Stay in touch with us', 'epic');
+            $display_in = isset($instance['display_in']) ? sanitize_text_field($instance['display_in']) : 'footer';?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Block title', 'epic' ); ?>:</label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
@@ -53,8 +53,8 @@ if(!class_exists('Epic_Social_Links_Widget')){
             <p>
                 <label for="<?php echo $this->get_field_id( 'display_in' ); ?>"><?php _e( 'Display in?', 'epic' ); ?>:</label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'display_in' ); ?>" name="<?php echo $this->get_field_name( 'display_in' ); ?>">
-                    <option value="footer" <?php echo $display_in == 'footer' ? 'selected="selected"' : ''; ?>><?php _e( 'Footer area', 'epic' ); ?></option>
-                    <option value="sidebar" <?php echo $display_in == 'sidebar' ? 'selected="selected"' : ''; ?>><?php _e( 'Sidebar area', 'epic' ); ?></option>
+                    <option value="footer" <?php selected($display_in, 'footer'); ?>><?php _e( 'Footer area', 'epic' ); ?></option>
+                    <option value="sidebar" <?php selected($display_in, 'sidebar'); ?>><?php _e( 'Sidebar area', 'epic' ); ?></option>
                 </select>
             </p>
         <?php
@@ -105,7 +105,7 @@ if(!class_exists('Epic_Social_Links_Widget')){
                         <?php $social_link_icon = get_post_meta($social_link->ID, '_social_link_icon', true); ?>
                         <li>
                             <a href="<?php echo esc_url($social_link_url); ?>" target="<?php echo $social_link_url_target; ?>">
-                                <i class="fa fa-<?php echo $social_link_icon; ?>"></i>
+                                <i class="fa fa-<?php echo esc_attr($social_link_icon); ?>"></i>
                             </a>
                         </li>
                     <?php endif; ?>

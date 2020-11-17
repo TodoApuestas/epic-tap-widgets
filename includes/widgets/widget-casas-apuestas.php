@@ -49,7 +49,7 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
             ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo de la columna:', 'epic' ); ?></label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
 <!--            <p>-->
 <!--                <label for="--><?php //echo $this->get_field_id( 'limit' ); ?><!--">--><?php //_e( 'Cantidad a mostrar:', 'epic' ); ?><!--</label>-->
@@ -57,7 +57,7 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
 <!--            </p>-->
             <p>
                 <label for="<?php echo $this->get_field_id( 'track' ); ?>"><?php _e( 'Web a trackear:', 'epic' ); ?></label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'track' ); ?>" name="<?php echo $this->get_field_name( 'track' ); ?>" value="<?php echo $track;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'track' ); ?>" name="<?php echo $this->get_field_name( 'track' ); ?>" value="<?php echo esc_attr($track);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'track_category' ); ?>"><?php _e( 'Categoria de tracking:', 'epic' ); ?></label>
@@ -101,7 +101,7 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
                         <tr>
                             <td>
                                 <a href="<?php echo esc_url($block_bookie['accion']) ?>" class="bookies-info" data-toggle="tooltip" data-placement="top" target="_blank">
-                                    <img class="img-resposive" src="<?php echo $block_bookie['logo']; ?>" >
+                                    <img class="img-resposive" src="<?php echo esc_url($block_bookie['logo']); ?>" >
                                 </a>
                                 <?php if(strcmp($key, 'bet365') !== 0): ?>
                                 <div style="display: none;" class="tt-bookie text-center">

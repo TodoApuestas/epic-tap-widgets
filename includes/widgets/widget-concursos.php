@@ -39,21 +39,21 @@ if(!class_exists('Epic_Concursos_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title']) ? $instance['title'] : __('Concursos','epic');
-            $width = isset($instance['width']) ? $instance['width'] : 300;
-            $height = isset($instance['height']) ? $instance['height'] : 500;
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']) : __('Concursos','epic');
+            $width = isset($instance['width']) ? sanitize_text_field($instance['width']) : 300;
+            $height = isset($instance['height']) ? sanitize_text_field($instance['height']) : 500;
             ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo de la columna', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_url($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'width' ); ?>"><?php _e( 'Ancho de las imagenes', 'epic' ); ?>:</label>
-                <input type="text" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" value="<?php echo $width;?>"/>
+                <input type="text" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" value="<?php echo esc_attr($width);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'height' ); ?>"><?php _e( 'Alto de las imagenes', 'epic' ); ?>:</label>
-                <input type="text" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo $height;?>"/>
+                <input type="text" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo esc_attr($height);?>"/>
             </p>
         <?php   }
 
@@ -95,8 +95,8 @@ if(!class_exists('Epic_Concursos_Widget')){
                             $image = $destination['url'].'/'.wp_basename($image);
                         }?>
                     <div class="<?php echo $active ?> item">
-                        <a href="<?php echo esc_url($concurso['url']) ?>" title="<?php echo $concurso['concursos'];  ?>" target="_blank" rel="bookmark">
-                            <img src="<?php echo $image;?>" alt="<?php echo $concurso['concursos']; ?>" title="<?php echo $concurso['concursos']; ?>" class="img-responsive center-block" style="width: <?php echo $width?>; height: <?php echo $height?>;">
+                        <a href="<?php echo esc_url($concurso['url']) ?>" title="<?php echo esc_attr($concurso['concursos']);  ?>" target="_blank" rel="bookmark">
+                            <img src="<?php echo esc_url($image);?>" alt="<?php echo esc_attr($concurso['concursos']); ?>" title="<?php echo esc_attr($concurso['concursos']); ?>" class="img-responsive center-block" style="width: <?php echo esc_attr($width)?>; height: <?php echo esc_attr($height)?>;">
                         </a>
                     </div><?php
                         $i++;

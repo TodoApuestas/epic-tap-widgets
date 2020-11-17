@@ -37,11 +37,11 @@ if(!class_exists('Epic_Random_News_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title']) ? $instance['title'] : __('Visita muchos mas articulos','epic');?>
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']) : __('Visita muchos mas articulos','epic');?>
 
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo del bloque', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
 <?php   }
 
@@ -76,7 +76,7 @@ if(!class_exists('Epic_Random_News_Widget')){
                                     <?php the_post_thumbnail('post-205x150', array('alt'=>$post->post_title, 'title'=>$post->post_title, 'class' => 'img-responsive center-block', 'loading' => 'lazy'));?>
                                 <?php else:?>
                                     <?php $default_image = get_theme_mod('epic_blog_default_image') ?>
-                                    <img src="<?php echo $default_image;?>" class="img-responsive center-block" alt="<?php echo $post->post_title; ?>" style="width: 205px; height: 150px;" loading="lazy">
+                                    <img src="<?php echo esc_url($default_image);?>" class="img-responsive center-block" alt="<?php echo $post->post_title; ?>" style="width: 205px; height: 150px;" loading="lazy">
                                 <?php endif;?>
                             </a>
                             <?php the_title(sprintf('<a href="%s">', get_the_permalink()), '</a>'); ?>

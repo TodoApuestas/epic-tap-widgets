@@ -38,15 +38,15 @@ if(!class_exists('Epic_Nuestros_Tipsters_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title']) ? $instance['title'] : __('Nuestros Tipsters', 'epic');
-            $limit = isset($instance['limit']) ? $instance['limit'] : 10;?>
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']) : __('Nuestros Tipsters', 'epic');
+            $limit = isset($instance['limit']) ? sanitize_text_field($instance['limit']) : 10;?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo del bloque', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'limit' ); ?>"><?php _e( 'Escribir la cantidad de tipster a visualizar', 'epic' ); ?>:</label>
-                <input type="text" id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" value="<?php echo $limit;?>"/>
+                <input type="text" id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" value="<?php echo esc_attr($limit);?>"/>
             </p><?php
         }
 
@@ -130,7 +130,7 @@ if(!class_exists('Epic_Nuestros_Tipsters_Widget')){
                                 </a>
                             </div>
                             <div class="col-md-8 no-padding-right">
-                                <h4><a href="<?php echo esc_url(get_permalink($tipster['tipster']->ID)) ?>"><?php echo $tipster['tipster']->post_title; ?></a></h4>
+                                <h4><a href="<?php echo esc_url(get_permalink($tipster['tipster']->ID)) ?>"><?php echo esc_html($tipster['tipster']->post_title); ?></a></h4>
                             </div>
                             <div class="col-md-12 clearfix">
                                 <table class="table table-responsive no-margin-bottom" style="color:white !important;">
@@ -143,9 +143,9 @@ if(!class_exists('Epic_Nuestros_Tipsters_Widget')){
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><?php echo $tipster['statistics']['yield']; ?>&percnt;</td>
-                                            <td><?php echo $tipster['statistics']['total_picks']; ?></td>
-                                            <td><span ><?php echo $tipster['statistics']['corrects']; ?>A</span> - <span ><?php echo $tipster['statistics']['wrongs']; ?>F</span> - <span><?php echo $tipster['statistics']['voids']; ?>N</span></td>
+                                            <td><?php echo esc_html($tipster['statistics']['yield']); ?>&percnt;</td>
+                                            <td><?php echo esc_html($tipster['statistics']['total_picks']); ?></td>
+                                            <td><span ><?php echo esc_html($tipster['statistics']['corrects']); ?>A</span> - <span ><?php echo esc_html($tipster['statistics']['wrongs']); ?>F</span> - <span><?php echo esc_html($tipster['statistics']['voids']); ?>N</span></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -41,30 +41,30 @@ if(!class_exists('Epic_Contact_Us_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title']) ? $instance['title'] : __('Contact Us', 'epic');
-            $phone = isset($instance['phone']) ? $instance['phone'] : get_theme_mod('epic_contact_phone');
-            $fax = isset($instance['fax']) ? $instance['fax'] : get_theme_mod('epic_contact_fax');
-            $email = isset($instance['email']) ? $instance['email'] : get_theme_mod('epic_contact_email');
-            $address = isset($instance['address']) ? $instance['address'] : get_theme_mod('epic_contact_address');?>
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']) : __('Contact Us', 'epic');
+            $phone = isset($instance['phone']) ? sanitize_text_field($instance['phone']) : get_theme_mod('epic_contact_phone');
+            $fax = isset($instance['fax']) ? sanitize_text_field($instance['fax']) : get_theme_mod('epic_contact_fax');
+            $email = isset($instance['email']) ? sanitize_email($instance['email']) : get_theme_mod('epic_contact_email');
+            $address = isset($instance['address']) ? sanitize_textarea_field($instance['address']) : get_theme_mod('epic_contact_address');?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Block title', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'phone' ); ?>"><?php _e( 'Phone', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'phone' ); ?>" name="<?php echo $this->get_field_name( 'phone' ); ?>" value="<?php echo $phone;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'phone' ); ?>" name="<?php echo $this->get_field_name( 'phone' ); ?>" value="<?php echo esc_attr($phone);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'fax' ); ?>"><?php _e( 'Fax', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'fax' ); ?>" name="<?php echo $this->get_field_name( 'fax' ); ?>" value="<?php echo $fax;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'fax' ); ?>" name="<?php echo $this->get_field_name( 'fax' ); ?>" value="<?php echo esc_attr($fax);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'email' ); ?>"><?php _e( 'Email', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'email' ); ?>" name="<?php echo $this->get_field_name( 'email' ); ?>" value="<?php echo $email;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'email' ); ?>" name="<?php echo $this->get_field_name( 'email' ); ?>" value="<?php echo esc_attr($email);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'address' ); ?>"><?php _e( 'Address', 'epic' ); ?>:</label>
-                <textarea class="widefat" id="<?php echo $this->get_field_id( 'address' ); ?>" name="<?php echo $this->get_field_name( 'address' ); ?>"><?php echo $address;?></textarea>
+                <textarea class="widefat" id="<?php echo $this->get_field_id( 'address' ); ?>" name="<?php echo $this->get_field_name( 'address' ); ?>"><?php echo esc_attr($address);?></textarea>
             </p><?php
         }
 
@@ -84,10 +84,10 @@ if(!class_exists('Epic_Contact_Us_Widget')){
             if(array_key_exists('after_title', $args)) echo $args['after_title']; ?>
             <div class="content">
                 <p>
-                    <?php echo $instance['address']; ?><br />
-                    Phone: +<?php echo $instance['phone']; ?><br />
-                    Fax: +<?php echo $instance['fax']; ?><br />
-                    Email: <a href="mailto:<?php echo $instance['email']; ?>"><?php echo $instance['email']; ?></a>
+                    <?php echo esc_html($instance['address']); ?><br />
+                    Phone: +<?php echo esc_html($instance['phone']); ?><br />
+                    Fax: +<?php echo esc_html($instance['fax']); ?><br />
+                    Email: <a href="mailto:<?php echo esc_html($instance['email']); ?>"><?php echo esc_html($instance['email']); ?></a>
                 </p>
             </div>
             <?php

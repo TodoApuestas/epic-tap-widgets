@@ -25,7 +25,7 @@ if(!class_exists('Epic_FB_Like_Box_Widget')){
         public function widget( $args, $instance ) {
             if(array_key_exists('before_widget', $args)) echo $args['before_widget']; ?>
             <div id="fb-root"></div>
-            <div class="fb-like-box" data-href="<?php echo $instance['link_facebook']; ?>" data-width="<?php echo $instance['width']; ?>" data-height="<?php echo $instance['height']; ?>" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false" style="width:100%"></div>
+            <div class="fb-like-box" data-href="<?php echo esc_url($instance['link_facebook']); ?>" data-width="<?php echo esc_attr($instance['width']); ?>" data-height="<?php echo esc_attr($instance['height']); ?>" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false" style="width:100%"></div>
             <script>(function(d, s, id) {
 
                     var js, fjs = d.getElementsByTagName(s)[0];
@@ -72,21 +72,21 @@ if(!class_exists('Epic_FB_Like_Box_Widget')){
          **/
         public function form( $instance )
         {
-            $link_facebook = esc_url(isset($instance['link_facebook']) ? $instance['link_facebook'] : get_theme_mod('epic_social_facebook'));
-            $width = isset($instance['width']) ? (integer)$instance['width'] : 258;
-            $height = isset($instance['height']) ? (integer)$instance['height'] : 300;
+            $link_facebook = isset($instance['link_facebook']) ? esc_url($instance['link_facebook']) : esc_url(get_theme_mod('epic_social_facebook'));
+            $width = isset($instance['width']) ? (integer)sanitize_text_field($instance['width']) : 258;
+            $height = isset($instance['height']) ? (integer)sanitize_text_field($instance['height']) : 300;
             ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'link_facebook' ); ?>"><?php _e( 'Escribir la url de pagina en Facebook', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'link_facebook' ); ?>" name="<?php echo $this->get_field_name( 'link_facebook' ); ?>" value="<?php echo $link_facebook;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'link_facebook' ); ?>" name="<?php echo $this->get_field_name( 'link_facebook' ); ?>" value="<?php echo esc_attr($link_facebook);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'width' ); ?>"><?php _e( 'Escribir el ancho del bloque', 'epic' ); ?>:</label>
-                <input type="text" class="" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" value="<?php echo $width;?>"/>
+                <input type="text" class="" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" value="<?php echo esc_attr($width);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'height' ); ?>"><?php _e( 'Escribir el alto del bloque', 'epic' ); ?>:</label>
-                <input type="text" class="" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo $height;?>"/>
+                <input type="text" class="" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo esc_attr($height);?>"/>
             </p><?php
         }
     }

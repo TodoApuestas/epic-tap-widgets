@@ -121,7 +121,7 @@ class Epic_Tap_Widgets_Admin {
         register_widget('Epic_Recent_Posts_Widget');
         unregister_widget('WP_Widget_Search');
         register_widget('Epic_Search_Form_Widget');
-        register_widget('Epic_Social_Links_Widget');
+//        register_widget('Epic_Social_Links_Widget');
         unregister_widget('WP_Widget_Tag_Cloud');
         register_widget('Epic_Tags_Cloud_Widget');
         register_widget('Epic_Tipsters_Blog_Widget');

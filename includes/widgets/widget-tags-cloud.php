@@ -39,10 +39,10 @@ if(!class_exists('Epic_Tags_Cloud_Widget')){
         public function form( $instance )
         {
             $current_taxonomy = $this->_get_current_taxonomy($instance);
-            $title = isset($instance['title'])?$instance['title']:__('Tags', 'epic'); ?>
+            $title = isset($instance['title'])?sanitize_text_field($instance['title']):__('Tags', 'epic'); ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Column Title', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy', 'epic') ?></label>
@@ -52,7 +52,7 @@ if(!class_exists('Epic_Tags_Cloud_Widget')){
                         if ( !$tax->show_tagcloud || empty($tax->labels->name) )
                             continue;
                         ?>
-                        <option value="<?php echo esc_attr($taxonomy) ?>" <?php selected($taxonomy, $current_taxonomy) ?>><?php echo $tax->labels->name; ?></option>
+                        <option value="<?php echo esc_attr($taxonomy) ?>" <?php selected($taxonomy, $current_taxonomy) ?>><?php echo esc_html($tax->labels->name); ?></option>
                     <?php endforeach; ?>
                 </select>
             </p>

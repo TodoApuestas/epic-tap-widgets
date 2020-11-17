@@ -38,16 +38,16 @@ if(!class_exists('Epic_Chat_Slim_Widget')){
          **/
         public function form( $instance )
         {
-            $url = isset($instance['url']) ? $instance['url'] : 'http://www.foro-apuestas.com/chat_slim/?pagina=top100apuestas';
-            $height = isset($instance['height']) ? $instance['height'] : 400;
+            $url = isset($instance['url']) ? esc_url_raw($instance['url']) : 'https://www.foro-apuestas.com/chat_slim/?pagina='.get_theme_mod('tap_tracker_domain');
+            $height = isset($instance['height']) ? sanitize_text_field($instance['height']) : 400;
             ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'url' ); ?>"><?php _e( 'Url del Chat Slim', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" value="<?php echo $url;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" value="<?php echo esc_url($url);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'height' ); ?>"><?php _e( 'Alto del bloque', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo $height;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo esc_attr($height);?>"/>
             </p>
         <?php
         }
@@ -65,7 +65,7 @@ if(!class_exists('Epic_Chat_Slim_Widget')){
             $height = $instance[ 'height' ];
 
             if(array_key_exists('before_widget', $args)) echo $args['before_widget']; ?>
-            <iframe frameborder="0" src="<?php echo $url; ?>" marginheight="2" marginwidth="2" allowtransparency="yes" style="border: 0px solid; width: 100%; height: <?php echo $height;?>px"></iframe><?php
+            <iframe frameborder="0" src="<?php echo esc_url($url); ?>" marginheight="2" marginwidth="2" allowtransparency="yes" style="border: 0px solid; width: 100%; height: <?php echo esc_attr($height);?>px"></iframe><?php
             if(array_key_exists('after_widget', $args)) echo $args['after_widget'];
         }
     }

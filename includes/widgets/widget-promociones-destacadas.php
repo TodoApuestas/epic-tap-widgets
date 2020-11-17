@@ -39,26 +39,25 @@ if(!class_exists('Epic_Promociones_Destacadas_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title'])?$instance['title']:__('Promociones Destacadas','epic');
-            $limit = isset($instance['limit'])?$instance['limit']: 3;
-            $category = isset($instance['category'])?$instance['category']: '';
+            $title = isset($instance['title'])?sanitize_text_field($instance['title']):__('Promociones Destacadas','epic');
+            $limit = isset($instance['limit'])?sanitize_text_field($instance['limit']): 3;
+            $category = isset($instance['category'])?sanitize_text_field($instance['category']): '';
             $categories = get_categories(); ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo de la columna', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Seleccionar categoria relacionada:', 'epic' ); ?></label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'category' ); ?>" name="<?php echo $this->get_field_name( 'category' ); ?>">
                     <?php foreach($categories as $cat): ?>
-                        <?php $selected = ($cat->slug == $category)?'selected="selected"':''?>
-                        <option value="<?php echo $cat->slug?>" <?php echo $selected;?>><?php echo $cat->name?></option>
+                        <option value="<?php echo $cat->slug?>" <?php selected( $cat->slug, $category ); ?>><?php echo esc_html($cat->name);?></option>
                     <?php endforeach;?>
                 </select>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'limit' ); ?>"><?php _e( 'Cantidad de noticias a mostrar', 'epic' ); ?>:</label>
-                <input type="text" id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" value="<?php echo $limit;?>"/>
+                <input type="text" id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" value="<?php echo esc_attr($limit);?>"/>
             </p>
 <?php   }
 
@@ -92,12 +91,12 @@ if(!class_exists('Epic_Promociones_Destacadas_Widget')){
                             <?php if(has_post_thumbnail($promocion_destacada->ID)):?>
                                 <?php the_post_thumbnail('promocion-destacada-248x98', array('alt'=>$promocion_destacada->post_title, 'title'=>$promocion_destacada->post_title, 'class' => 'img-responsive', 'loading' => 'lazy'));?>
                             <?php else:?>
-                                <img src="<?php echo get_theme_mod('epic_blog_default_image')?>" class="img-responsive" alt="<?php echo $promocion_destacada->post_title; ?>" title="<?php echo $promocion_destacada->post_title; ?>" style="width: 248px; height: 98px;" loading="lazy">
+                                <img src="<?php echo esc_url(get_theme_mod('epic_blog_default_image'))?>" class="img-responsive" alt="<?php echo $promocion_destacada->post_title; ?>" title="<?php echo $promocion_destacada->post_title; ?>" style="width: 248px; height: 98px;" loading="lazy">
                             <?php endif;?>
                         </a>
                         <h4>
                             <a href="<?php echo esc_url(get_permalink($promocion_destacada->ID)); ?>" title="<?php echo sprintf(__('Leer mas sobre $1%s', 'epic'), $promocion_destacada->post_title);  ?>" rel="bookmark">
-                                <?php echo $promocion_destacada->post_title; ?>
+                                <?php echo esc_html($promocion_destacada->post_title); ?>
                             </a>
                         </h4>
                         <ul class="blog-info">

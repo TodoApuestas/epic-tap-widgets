@@ -4,8 +4,6 @@ if(!class_exists('Epic_Articulos_Relacionados_Widget')){
 
         /**
          * Constructor.
-         *
-         * @return Epic_Articulos_Relacionados_Widget
          */
         public function __construct() {
             parent::__construct( 'widget_epic_articulos_relacionados', __( 'Articulos Relacionados', 'epic' ), array(
@@ -38,11 +36,11 @@ if(!class_exists('Epic_Articulos_Relacionados_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title'])?$instance['title']:__('Articulos Relacionados','epic');
-            $limit = isset($instance['limit'])?$instance['limit']: 5; ?>
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']) : __('Articulos Relacionados','epic');
+            $limit = isset($instance['limit']) && is_int($instance['limit']) ? sanitize_text_field($instance['limit']) : 5; ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo de la columna', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_html($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'limit' ); ?>"><?php _e( 'Cantidad de articulos a mostrar', 'epic' ); ?>:</label>

@@ -4,8 +4,6 @@ if(!class_exists('Epic_Banner_Promo_Widget')){
 
         /**
          * Constructor.
-         *
-         * @return Epic_Banner_Promo_Widget
          */
         public function __construct() {
             parent::__construct( 'widget_epic_banner_promo', __( 'Banner Promo', 'epic' ), array(
@@ -40,31 +38,31 @@ if(!class_exists('Epic_Banner_Promo_Widget')){
          **/
         public function form( $instance )
         {
-            $text_script = isset($instance['text_script'])?$instance['text_script']:'';
-            $width = isset($instance['width'])?$instance['width']:'';
-            $height = isset($instance['height'])?$instance['height']:'';
-            $position = isset($instance['position'])?$instance['position']:'center';
+            $text_script = isset($instance['text_script'])?sanitize_textarea_field($instance['text_script']):'';
+            $width = isset($instance['width'])?sanitize_text_field($instance['width']):'';
+            $height = isset($instance['height'])?sanitize_text_field($instance['height']):'';
+            $position = isset($instance['position'])?sanitize_text_field($instance['position']):'center';
             ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'text_script' ); ?>"><?php _e( 'Codigo html/javascript', 'epic' ); ?>:</label>
                 <textarea class="widefat" id="<?php echo $this->get_field_id( 'text_script' ); ?>" name="<?php echo $this->get_field_name( 'text_script' ); ?>" cols="4" rows="5">
-                    <?php echo esc_attr( $text_script ); ?>
+                    <?php echo esc_textarea( $text_script ); ?>
                 </textarea>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'width' ); ?>"><?php _e( 'Ancho', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" value="<?php echo $width;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" value="<?php echo esc_attr($width);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'height' ); ?>"><?php _e( 'Alto', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo $height;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'height' ); ?>" name="<?php echo $this->get_field_name( 'height' ); ?>" value="<?php echo esc_attr($height);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'position' ); ?>"><?php _e( 'Posicion', 'epic' ); ?>:</label>
                 <select class="widefat" id="<?php echo $this->get_field_id( 'position' ); ?>" name="<?php echo $this->get_field_name( 'position' ); ?>">
-                    <option value="left" <?php if(strcmp($position, 'left') == 0):?>selected="selected"<?php endif; ?>>Izquierda</option>
-                    <option value="center" <?php if(strcmp($position, 'center') == 0):?>selected="selected"<?php endif; ?>>Centro</option>
-                    <option value="right" <?php if(strcmp($position, 'right') == 0):?>selected="selected"<?php endif; ?>>Derecha</option>
+                    <option value="left" <?php selected( 'left', $position ); ?>>Izquierda</option>
+                    <option value="center" <?php selected( 'center', $position ); ?>>Centro</option>
+                    <option value="right" <?php selected( 'right', $position ); ?>>Derecha</option>
                 </select>
             </p>
         <?php
@@ -83,7 +81,7 @@ if(!class_exists('Epic_Banner_Promo_Widget')){
             $width = $instance[ 'width' ];
             $height = $instance[ 'height' ];
             $position = $instance[ 'position' ];?>
-            <div class="widget widget_epic_banner_promo marB0" style="width: <?php echo $width;?>px; height: <?php echo $height;?>px; <?php if(strcmp($position, 'center') == 0):?>margin:0 auto;<?php else: ?>float:<?php echo $position; ?>;display: inline;<?php endif; ?>"><?php
+            <div class="widget widget_epic_banner_promo marB0" style="width: <?php echo esc_attr($width);?>px; height: <?php echo esc_attr($height);?>px; <?php if(strcmp($position, 'center') == 0):?>margin:0 auto;<?php else: ?>float:<?php echo esc_attr($position); ?>;display: inline;<?php endif; ?>"><?php
             echo $text_script;?>
             </div><?php
         }

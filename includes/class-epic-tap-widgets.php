@@ -199,7 +199,7 @@ class Epic_Tap_Widgets {
         /**
          *  Load Social Links Widget
          */
-        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-social-links.php';
+//        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-social-links.php';
 
         /**
          *  Load Tags Cloud Widget

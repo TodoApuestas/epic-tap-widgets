@@ -40,27 +40,27 @@ if(!class_exists('Epic_Newsletter_Widget')) {
 		 * @return void
 		 **/
 		public function form( $instance ) {
-			$title      = isset( $instance['title'] ) ? $instance['title'] : __( 'Suscribase al boletin', 'epic' );
-			$text_info  = isset( $instance['text_info'] ) ? $instance['text_info'] : __( 'Mantengase informado de nuestras <br> promociones y concursos!', 'epic' );
-			$text_label = isset( $instance['text_label'] ) ? $instance['text_label'] : __( 'Escriba su direccion de e-mail:', 'epic' );
+			$title      = isset( $instance['title'] ) ? sanitize_text_field($instance['title']) : __( 'Suscribase al boletin', 'epic' );
+			$text_info  = isset( $instance['text_info'] ) ? sanitize_textarea_field($instance['text_info']) : __( 'Mantengase informado de nuestras <br> promociones y concursos!', 'epic' );
+			$text_label = isset( $instance['text_label'] ) ? sanitize_textarea_field($instance['text_label']) : __( 'Escriba su direccion de e-mail:', 'epic' );
 			?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo del bloque', 'epic' ); ?>
                     :</label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-                       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title; ?>"/>
+                       name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title); ?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'text_info' ); ?>"><?php _e( 'Texto informativo', 'epic' ); ?>
                     :</label>
                 <textarea class="widefat" id="<?php echo $this->get_field_id( 'text_info' ); ?>"
-                          name="<?php echo $this->get_field_name( 'text_info' ); ?>"><?php echo $text_info; ?></textarea>
+                          name="<?php echo $this->get_field_name( 'text_info' ); ?>"><?php echo esc_textarea($text_info); ?></textarea>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'text_label' ); ?>"><?php _e( 'Texto del campo', 'epic' ); ?>
                     :</label>
                 <textarea class="widefat" id="<?php echo $this->get_field_id( 'text_label' ); ?>"
-                          name="<?php echo $this->get_field_name( 'text_label' ); ?>"><?php echo $text_label; ?></textarea>
+                          name="<?php echo $this->get_field_name( 'text_label' ); ?>"><?php echo esc_textarea($text_label); ?></textarea>
             </p>
 		<?php }
 		
@@ -80,22 +80,20 @@ if(!class_exists('Epic_Newsletter_Widget')) {
 			
 			if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['newsletter_conditions'] ) ) {
 				
-				$newsletter = $_POST['newsletter_conditions'];
-				
-				if ( ! isset( $_POST['__newsletter'] ) ) {
-					$errors[] = __( 'Token CRSF incorrecto. Recargar la pagina para generar uno nuevo.', 'epic' );
-				} elseif ( ! wp_verify_nonce( $_POST['__newsletter'], sprintf( 'newsletter_form_%s', $newsletter ) ) ) {
+				$newsletter = sanitize_key($_POST['newsletter_conditions']);
+
+				if ( ! isset( $_POST['__newsletter'] ) || ! wp_verify_nonce( sanitize_key($_POST['__newsletter']), sprintf( 'newsletter_form_%s', $newsletter ) ) ) {
 					$errors[] = __( 'Token CRSF incorrecto. Recargar la pagina para generar uno nuevo.', 'epic' );
 				}
 				
 				$errors = apply_filters( 'epic_recaptcha_verification', $errors );
 				
-				$email = $_POST['subscribe'];
+				$email = sanitize_email($_POST['subscribe']);
 				
-				$errors = epic_validate_email( $email, $errors );
+				$errors = $this->validate_email( $email, $errors );
 				if ( ! count( $errors ) ) {
 					$email  = trim( $email );
-					$result = epic_send_subscribe_email( $email );
+					$result = $this->send_subscribe_email( $email );
 				}
 				
 			}
@@ -110,8 +108,8 @@ if(!class_exists('Epic_Newsletter_Widget')) {
 			if ( array_key_exists( 'after_title', $args ) ) {
 				echo $args['after_title'];
 			} ?>
-            <p class="text_info"><?php echo $instance['text_info'] ?></p>
-            <p class="text_label"><?php echo $instance['text_label'] ?></p>
+            <p class="text_info"><?php echo esc_html($instance['text_info']); ?></p>
+            <p class="text_label"><?php echo esc_html($instance['text_label']); ?></p>
             <form id="suscribirse-al-newsletter" action="#suscribirse-al-newsletter" role="form" method="post"
                   class="form-horizontal">
                 <div class="row">
@@ -131,7 +129,7 @@ if(!class_exists('Epic_Newsletter_Widget')) {
                                     :</p>
                                 <ul>
 									<?php foreach ( $errors as $error ): ?>
-                                        <li><?php echo $error; ?></li>
+                                        <li><?php echo esc_html($error); ?></li>
 									<?php endforeach; ?>
                                 </ul>
                             </div>
@@ -168,5 +166,29 @@ if(!class_exists('Epic_Newsletter_Widget')) {
 			}
 			
 		}
+
+		private function validate_email($email, array $errors ){
+            $email = trim($email);
+            if( empty( $email ) )  {
+                $errors[] = __('Por favor proporcione la direccion de correo electronico.', 'epic');
+            } elseif ( false === is_email( $email ) )  {
+                $errors[] = __('El correo electronico proporcionado no es valido.', 'epic');
+            }
+
+            return $errors;
+        }
+
+        private function send_subscribe_email($email){
+            $emailTo = get_theme_mod('epic_contact_email');
+            if (!isset($emailTo) || ($emailTo === '') ){
+                $emailTo = get_option('admin_email');
+            }
+            $site_name = get_bloginfo('name');
+            $subject = sprintf(__('[NUEVA SUBSCRIPCION DESDE %s AL BOLETIN] From "%s"', 'epic'), $site_name, $email);
+            $body = sprintf(__('Correo electronico', 'epic').": %s\n\n", $email);
+            $headers = 'From: '.$email.' <'.$email.'>' . "\r\n" . 'Reply-To: ' . $email;
+
+            return wp_mail($emailTo, $subject, $body, $headers);
+        }
 	}
 }

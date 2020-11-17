@@ -50,13 +50,13 @@ if(!class_exists('Epic_Enlaces_Widget')){
         {
             $limit = 5;
             $link_cats = get_terms( 'link_category' );
-            if ( in_array('limit', $instance) && !$limit = (integer)$instance['limit'] ) {
+            if ( in_array('limit', $instance) && !$limit = (integer)sanitize_text_field($instance['limit']) ) {
 	            $limit = -1;
             }
-            $title = isset($instance['title']) ? $instance['title'] : __('Nuestras Webs','epic'); ?>
+            $title = isset($instance['title']) ? sanitize_text_field($instance['title']) : __('Nuestras Webs','epic'); ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titulo de la columna', 'epic' ); ?>:</label>
-                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $title;?>"/>
+                <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr($title);?>"/>
             </p>
             <p>
                 <label for="<?php echo $this->get_field_id('category'); ?>"><?php _e( 'Select Link Category', 'epic' ); ?>:</label>
@@ -116,11 +116,11 @@ if(!class_exists('Epic_Enlaces_Widget')){
             if($enlaces_count): ?>
             <ul class="list-unstyled"><?php
             foreach($enlaces as $enlace):
-                $enlace_name = isset($instance['name']) ? $enlace->link_name : $enlace->link_url;
-                $enlace_description = empty($enlace->link_description) ? '' : 'title="'.$enlace->link_description.'"';
+                $enlace_name = isset($instance['name']) ? esc_html($enlace->link_name) : esc_url($enlace->link_url);
+                $enlace_description = empty($enlace->link_description) ? '' : 'title="'.esc_attr($enlace->link_description).'"';
                 $enlace_href = esc_url($enlace->link_url);
-                $enlace_target = empty($enlace->link_target) ? 'target="_blank"' : 'target="'.$enlace->link_target.'"';
-                $enlace_rel = empty($enlace->link_rel) ? '' : 'rel="'.$enlace->link_rel.'"'; ?>
+                $enlace_target = empty($enlace->link_target) ? 'target="_blank"' : 'target="'.esc_attr($enlace->link_target).'"';
+                $enlace_rel = empty($enlace->link_rel) ? '' : 'rel="'.esc_attr($enlace->link_rel).'"'; ?>
                 <li>
                     <a href="<?php echo $enlace_href; ?>" <?php echo $enlace_rel?> <?php echo $enlace_target; ?> <?php echo $enlace_description ?>>
                         <i class="fa fa-check"></i> <?php echo $enlace_name; ?>
