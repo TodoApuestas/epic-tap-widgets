@@ -3,7 +3,7 @@ Contributors: mrbrazzi, todoapuestas
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=brazzisoft.com@gmail.com&lc=US&item_name=For%20improve%20Wordpress%20plugin%20Epic%20Tap%20Widgets&currency_code=USD&no_note=0&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest
 Tags: widget, tipsters, bets, picks, bonus, banner, chat, newsletter, related posts, random news, recent post, tags cloud, search form, social links, facebook like box, twitter timeline 
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5.3
 Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,6 +49,9 @@ Nothing for now
 Nothing for now
 
 == Changelog ==
+
+= 1.2.1 =
+* Tested up to Wordpress 5.5.3
 
 = 1.2.0 =
 * Fixed multiples issues
