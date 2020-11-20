@@ -1,8 +1,8 @@
 <?php
 if(!class_exists('Epic_Casas_Apuestas_Widget')){
     class Epic_Casas_Apuestas_Widget extends WP_Widget {
-        private string $track_category;
-        private string $track_domain;
+        private $track_category;
+        private $track_domain;
 
         /**
          * Constructor.

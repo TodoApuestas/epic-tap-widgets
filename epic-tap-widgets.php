@@ -9,7 +9,7 @@
  * Plugin Name:       Epic Tap Widgets
  * Plugin URI:        https://www.wordpress.org/plugins/epic-tap-widgets/
  * Description:       Widgets collection for TodoApuestas's blog network.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author:            Alain Sanchez <luka.ghost@gmail.com>
  * Author URI:        http://www.linkedin.com/in/mrbrazzi/
  * License:           GPL-2.0+
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EPIC_TAP_WIDGETS_VERSION', '1.2.1' );
+define( 'EPIC_TAP_WIDGETS_VERSION', '1.2.2' );
 
 /**
  * The code that runs during plugin activation.
