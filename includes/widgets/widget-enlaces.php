@@ -63,8 +63,9 @@ if(!class_exists('Epic_Enlaces_Widget')){
                 <select class="widefat" id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>">
                     <option value=""><?php _ex('All Links', 'links widget', 'epic'); ?></option>
                     <?php
+                    $category = isset($instance['category']) ? sanitize_text_field($instance['category']) : '';
                     foreach ( $link_cats as $link_cat ) {
-                        printf('<option value="%s" %s >%s</option>\n', (integer)$link_cat->term_id, selected( $instance['category'], $link_cat->term_id, false ), $link_cat->name);
+                        printf('<option value="%s" %s >%s</option>\n', (integer)$link_cat->term_id, selected( $category, $link_cat->term_id, false ), $link_cat->name);
                     }
                     ?>
                 </select>

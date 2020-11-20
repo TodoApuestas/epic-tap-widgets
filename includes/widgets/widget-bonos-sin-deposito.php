@@ -87,7 +87,7 @@ if(!class_exists('Epic_Bonos_Sin_Deposito_Widget')){
             if(array_key_exists('before_title', $args)) echo $args['before_title'];
             echo $instance['title'];
             if(array_key_exists('after_title', $args)) echo $args['after_title']; ?>
-            <div id="block_bookies"><?php
+            <div class="block_bookies"><?php
             $bonos_no_deposit = array();
             $link_more = null;
             if(!empty($result_from_api) && isset($result_from_api['bonos_no_deposit'])){

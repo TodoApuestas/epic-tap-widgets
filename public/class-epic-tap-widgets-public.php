@@ -66,6 +66,7 @@ class Epic_Tap_Widgets_Public {
 		 * class.
 		 */
 
+        wp_enqueue_style( $this->epic_tap_widgets . '-bootstrap', plugin_dir_url( __FILE__ ) . 'libs/bootstrap/css/bootstrap.min.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'css/epic-tap-widgets-public.min.css', array(), $this->version, 'all' );
 
 	}
@@ -89,6 +90,7 @@ class Epic_Tap_Widgets_Public {
 		 * class.
 		 */
 
+        wp_enqueue_script( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'libs/bootstrap/js/bootstrap.min.js', array( 'jquery' ), $this->version, true );
 //		wp_enqueue_script( $this->epic_tap_widgets, plugin_dir_url( __FILE__ ) . 'js/epic-tap-widgets-public.js', array( 'jquery' ), $this->version, false );
 
 	}

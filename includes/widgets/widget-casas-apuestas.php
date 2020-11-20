@@ -87,7 +87,7 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
             if(array_key_exists('before_title', $args)) echo $args['before_title'];
             echo $instance['title'];
             if(array_key_exists('after_title', $args)) echo $args['after_title']; ?>
-            <div id="block_bookies"><?php
+            <div class="block_bookies"><?php
             $list_blocks_bookies = array();
             $link_more = null;
             if(!empty($result_from_api) && isset($result_from_api['blocks_bookies'])){

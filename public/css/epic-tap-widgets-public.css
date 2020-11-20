@@ -34,7 +34,7 @@ aside.widget_epic_search_form {
 }
 
 /* widget_epic_concursos */
-#concursoCarousel, #block_bookies {
+#concursoCarousel, .widget .block_bookies {
     padding-top: 25px;
 }
 
@@ -75,29 +75,29 @@ aside.widget_epic_search_form {
     border-right: 5px solid #B0CB1F !important;
 }
 
-#block_bookies .bookies-bono {
+.block_bookies .bookies-bono {
     font-size: 120%;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     color: #5B5B5B;
 }
 
-#block_bookies .tooltip-inner {
+.block_bookies .tooltip-inner {
     padding: 10px 15px;
     border-radius: 0;
 }
 
-#block_bookies .tooltip-inner p {
+.block_bookies .tooltip-inner p {
     margin-bottom: 0;
 }
 
-#block_bookies .tooltip-inner p.bookie_name {
+.block_bookies .tooltip-inner p.bookie_name {
     text-transform: uppercase;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 
-#block_bookies .tooltip-inner p.bookie-bono {
+.block_bookies .tooltip-inner p.bookie-bono {
     font-size: 110%;
 }
 
