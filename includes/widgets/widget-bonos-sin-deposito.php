@@ -118,6 +118,7 @@ if(!class_exists('Epic_Bonos_Sin_Deposito_Widget')){
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <span style="font-size: 12px;"><?php echo _e('Publicidad | +18 Juega con responsabilidad', 'epic') ?></span>
                 <!--<a class="button-tip-link" href="http://www.foro-apuestas.com/index.php?threads/%C2%A1reg%C3%ADstrate-desde-todoapuestas-con-un-dep%C3%B3sito-m%C3%ADnimo-y-te-regalamos-10.12323/" target="_blank">
                     <div class="button-tip bottom">
                         <div class="button-tip-inner button-tip-inner2"> <?php /*_e('Como obtener el pin', 'epic') */?> </div>
