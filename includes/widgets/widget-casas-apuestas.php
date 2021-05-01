@@ -42,7 +42,7 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title']) ? $instance['title'] :  __('Bonos Apuestas', 'epic');
+            $title = isset($instance['title']) ? $instance['title'] :  __('Casas de apuestas', 'epic');
 //            $limit = isset($instance['limit']) ? $instance['limit'] : 'blog';
             $track = isset($instance['track']) ? $instance['track'] : $this->track_domain;
             $track_category = isset($instance['track_category']) ? $instance['track_category'] : $this->track_category;
@@ -80,6 +80,7 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
          * @param array $instance Saved values from database.
          */
         public function widget( $args, $instance ) {
+            $instance['title'] = 'Casas de apuestas';
             $track_site = null !== $instance['track'] ? $instance['track'] : $this->track_domain;
             $track_category = null !== $instance['track_category'] ? $instance['track_category'] : $this->track_category;
             $result_from_api = apply_filters('rest_client_tap_request_block_bookies', $track_site, $track_category);

@@ -8,9 +8,9 @@ if(!class_exists('Epic_Bonos_Sin_Deposito_Widget')){
          * Constructor.
          */
         public function __construct() {
-            parent::__construct( 'widget_epic_bonos_sin_deposito', __( 'Bonos sin Deposito', 'epic' ), array(
+            parent::__construct( 'widget_epic_bonos_sin_deposito', __( 'Casas de apuestas sin deposito', 'epic' ), array(
                     'classname'   => 'widget_epic_bonos_sin_deposito',
-                    'description' => __( 'Use este widget para mostrar los bonos sin depositos.', 'epic' ),
+                    'description' => __( 'Use este widget para mostrar las casas de apuestas sin depositos.', 'epic' ),
                 ) );
             $this->track_domain = get_theme_mod('tap_tracker_domain');
             $this->track_category = get_theme_mod('tap_tracker_web_category', 'apuestas');
@@ -42,7 +42,7 @@ if(!class_exists('Epic_Bonos_Sin_Deposito_Widget')){
          **/
         public function form( $instance )
         {
-            $title = isset($instance['title'])?sanitize_text_field($instance['title']): __('Bonos sin Deposito', 'epic');
+            $title = isset($instance['title'])?sanitize_text_field($instance['title']): __('Casas de apuestas sin deposito', 'epic');
 //            $limit = isset($instance['limit'])?$instance['limit']:'blog';
             $track = isset($instance['track']) ? sanitize_text_field($instance['track']) : $this->track_domain;
             $track_category = isset($instance['track_category']) ? sanitize_text_field($instance['track_category']) : $this->track_category;
@@ -80,6 +80,9 @@ if(!class_exists('Epic_Bonos_Sin_Deposito_Widget')){
          * @param array $instance Saved values from database.
          */
         public function widget( $args, $instance ) {
+            // Desabilitado de momento
+            return;
+            $instance['title'] = 'Casas de apuestas';
             $track_site = null !== $instance['track'] ? $instance['track'] : $this->track_domain;
             $track_category = null !== $instance['track_category'] ? $instance['track_category'] : $this->track_category;
             $result_from_api = apply_filters('rest_client_tap_request_block_bookies', $track_site, $track_category);
@@ -128,12 +131,12 @@ if(!class_exists('Epic_Bonos_Sin_Deposito_Widget')){
                 <a class="button-tip-link" href="<?php echo esc_url($link_more) ?>" target="_blank">
                     <div class="button-tip bottom">
 <!--                        <div class="button-tip-arrow"></div>-->
-                        <div class="button-tip-inner"> <?php _e('Ver mas bonos', 'epic') ?> </div>
+                        <div class="button-tip-inner"> <?php _e('Ver mas casas de apuestas', 'epic') ?> </div>
                     </div>
                 </a>
                 <?php endif;
             else: ?>
-                <p class="text-center"><?php _e('No hay bonos publicados', 'epic')?></p><?php
+                <p class="text-center"><?php _e('No hay casas de apuestas publicadas', 'epic')?></p><?php
             endif; ?>
             </div><?php
             if(array_key_exists('after_widget', $args)) echo $args['after_widget'];
