@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=brazz
 Tags: widget, tipsters, bets, picks, bonus, banner, chat, newsletter, related posts, random news, recent post, tags cloud, search form, social links, facebook like box, twitter timeline 
 Requires at least: 5.0
 Tested up to: 5.5.3
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,7 +50,7 @@ Nothing for now
 
 == Changelog ==
 
-= 1.2.7 =
+= 1.2.8 =
 * Change text "Bonos Apuestas" for "Casas de apuestas"
 * Widget "Bonos sin Deposito" disabled
 
