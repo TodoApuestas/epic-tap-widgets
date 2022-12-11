@@ -47,6 +47,33 @@ aside.widget_epic_search_form {
     background-color: #6CAEA0;
 }
 
+/* widget_epic_casas_apuestas_top */
+.widget_epic_casas_apuestas_top .block-bookies-flex-table {
+    display: flex !important;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.block-bookies-flex-table > .block-bookies-flex-item {
+    flex: 0 12.5%;
+    padding: 10px 5px;
+    margin-bottom: 1px;
+}
+
+.block-bookies-flex-item:nth-child(2n + 1) {
+    background: #dde7e5;
+}
+.block-bookies-flex-item:nth-child(2n) {
+    background: #d6d8d7;
+}
+
+.block-bookies-flex-item > a.bookies-info {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
 /* widget_epic_casas_apuestas */
 .widget_epic_casas_apuestas .table {
     margin-bottom: 0 !important;

@@ -142,6 +142,11 @@ class Epic_Tap_Widgets {
         require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-casas-apuestas.php';
 
         /**
+         *  Load Casas Apuestas Widget (Top)
+         */
+        require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-casas-apuestas-top.php';
+
+        /**
          *  Load Chat Slim Widget
          */
         require plugin_dir_path( dirname( __FILE__ ) ) . '/includes/widgets/widget-chat-slim.php';

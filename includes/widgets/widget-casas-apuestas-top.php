@@ -1,6 +1,6 @@
 <?php
-if(!class_exists('Epic_Casas_Apuestas_Widget')){
-    class Epic_Casas_Apuestas_Widget extends WP_Widget {
+if(!class_exists('Epic_Casas_Apuestas_Top_Widget')){
+    class Epic_Casas_Apuestas_Top_Widget extends WP_Widget {
         private $track_category;
         private $track_domain;
 
@@ -8,9 +8,9 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
          * Constructor.
          */
         public function __construct() {
-            parent::__construct( 'widget_epic_casas_apuestas', __( 'Casas de Apuestas', 'epic' ), array(
-                    'classname'   => 'widget_epic_casas_apuestas hidden-xs-block',
-                    'description' => __( 'Use este widget para mostrar un ranking de las casas de apuestas.', 'epic' ),
+            parent::__construct( 'widget_epic_casas_apuestas_top', __( 'Casas de Apuestas (Top)', 'epic' ), array(
+                    'classname'   => 'widget_epic_casas_apuestas_top',
+                    'description' => __( 'Use este widget para mostrar las casas de apuestas.', 'epic' ),
                 ) );
             $this->track_domain = get_theme_mod('tap_tracker_domain');
             $this->track_category = get_theme_mod('tap_tracker_web_category', 'apuestas');
@@ -75,60 +75,37 @@ if(!class_exists('Epic_Casas_Apuestas_Widget')){
          * @param array $instance Saved values from database.
          */
         public function widget( $args, $instance ) {
-            $instance['title'] = 'Casas de apuestas';
+//            $instance['title'] = 'Casas de apuestas';
             $track_site = null !== $instance['track'] ? $instance['track'] : $this->track_domain;
             $track_category = null !== $instance['track_category'] ? $instance['track_category'] : $this->track_category;
             $result_from_api = apply_filters('rest_client_tap_request_block_bookies', $track_site, $track_category);
 	        if(array_key_exists('before_widget', $args)) echo $args['before_widget'];
-            if(array_key_exists('before_title', $args)) echo $args['before_title'];
-            echo $instance['title'];
-            if(array_key_exists('after_title', $args)) echo $args['after_title']; ?>
+//            if(array_key_exists('before_title', $args)) echo $args['before_title'];
+//            echo $instance['title'];
+//            if(array_key_exists('after_title', $args)) echo $args['after_title']; ?>
             <div class="block_bookies"><?php
             $list_blocks_bookies = array();
-            $link_more = null;
             if(!empty($result_from_api) && isset($result_from_api['blocks_bookies'])){
                 $list_blocks_bookies = $result_from_api['blocks_bookies'];
-                $link_more = $result_from_api['link_more'];
             }
             if(!empty($list_blocks_bookies)):?>
-                <table class="table table-responsive table-block-bookies">
-                    <tbody>
-                    <?php foreach($list_blocks_bookies as $key => $block_bookie):?>
-                        <tr>
-                            <td>
-                                <a href="<?php echo esc_url($block_bookie['accion']) ?>" class="bookies-info" data-toggle="tooltip" data-placement="top" target="_blank">
-                                    <img class="img-responsive" src="<?php echo esc_url($block_bookie['logo']); ?>" >
-                                </a>
-                                <?php if(strcmp($key, 'bet365') !== 0): ?>
-                                <div style="display: none;" class="tt-bookie text-center">
-                                    <?php echo sprintf(__('<p>Casa de apuestas</p><p class="bookie_name">%s</p>', 'epic'), $block_bookie['nombre']); ?>
-                                </div>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <a href="<?php echo esc_url($block_bookie['accion']) ?>" data-toggle="tooltip" data-placement="top" class="bookies-bono" target="_blank">
-                                    <?php echo $block_bookie['bono']; ?> <?php if((boolean)$block_bookie['patrocinador']): ?>+10<?php endif ?>
-                                </a>
-		                        <?php if(strcmp($key, 'bet365') !== 0): ?>
-                                <div style="display: none;" class="tt-bookie text-center">
-                                    <?php $bono_patrocinador = (boolean)$block_bookie['patrocinador'] ? "+10" : ""; ?>
-                                    <?php echo sprintf(__('<p class="bookie-bono">%s %s</p><p class="bookie_pin_text">Gratis con pin de:</p> %s', 'epic'), $block_bookie['bono'], $bono_patrocinador, '<div class="paysafecard-logo"></div>'); ?>
-                                </div>
-		                        <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <p class="text-center marT10" style="font-size: 12px;"><?php echo _e('Publicidad | +18 Juega con responsabilidad', 'epic') ?></p>
-                <?php if(!empty($link_more)): ?>
-                <a class="button-tip-link visible-sm" href="<?php echo esc_url($link_more) ?>" target="_blank">
-                    <div class="button-tip bottom">
-                        <div class="button-tip-inner"> <?php _e('Ver mas casas', 'epic') ?> </div>
+                <div class="block-bookies-flex-table">
+                <?php foreach($list_blocks_bookies as $key => $block_bookie):?>
+                    <div class="block-bookies-flex-item">
+                        <a href="<?php echo esc_url($block_bookie['accion']) ?>" class="bookies-info" data-toggle="tooltip" data-placement="top" target="_blank">
+                            <img class="img-responsive" src="<?php echo esc_url($block_bookie['logo']); ?>" >
+                            Reg&iacute;strate
+                        </a>
+                        <?php if(strcmp($key, 'bet365') !== 0): ?>
+                            <div style="display: none;" class="tt-bookie text-center">
+                                <?php echo sprintf(__('<p>Casa de apuestas</p><p class="bookie_name">%s</p>', 'epic'), $block_bookie['nombre']); ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                </a>
-                <?php endif;
-            else: ?>
+                <?php endforeach; ?>
+                </div>
+                <p class="text-center marT10" style="font-size: 12px;"><?php echo _e('Publicidad | +18 Juega con responsabilidad', 'epic') ?></p>
+            <?php else: ?>
                 <p class="text-center marT10"><?php _e('No hay casas de apuestas publicadas', 'epic')?></p><?php
             endif; ?>
             </div><?php
